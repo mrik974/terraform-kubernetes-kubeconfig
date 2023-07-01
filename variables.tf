@@ -1,13 +1,3 @@
-variable "filename" {
-  description = "Filename"
-  default     = "kubeconfig"
-  type        = string
-}
-variable "colors" {
-  description = "Colors"
-  default     = true
-  type        = bool
-}
 
 variable "current_context" {
   description = "Context name"

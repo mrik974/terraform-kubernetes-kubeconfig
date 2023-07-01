@@ -1,15 +1,16 @@
-resource "local_sensitive_file" "kubeconfig" {
-  content = templatefile("${path.module}/kubeconfig-template.tpl", { contexts = var.contexts, clusters = var.clusters, users = var.users, colors = var.colors, current_context = var.current_context })
-  filename          = "./${var.filename}"
-}
 
-output "kubeconfig_path" {
-  value       = local_sensitive_file.kubeconfig.filename
-  description = "Path to the kubeconfig file"
+locals {
+  content = templatefile("${path.module}/kubeconfig-template.tpl", { contexts = var.contexts, clusters = var.clusters, users = var.users, current_context = var.current_context })
 }
 
 output "kubeconfig_content" {
-  value       = yamldecode(local_sensitive_file.kubeconfig.content)
+  value       = yamldecode(local.content)
   description = "HCL representation of kubeconfig file contents"
+  sensitive   = true
+}
+
+output "kubeconfig_content_yaml" {
+  value       = local.content
+  description = "Yaml representation of kubeconfig file contents"
   sensitive   = true
 }

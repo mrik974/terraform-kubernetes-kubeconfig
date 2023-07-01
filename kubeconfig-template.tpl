@@ -1,7 +1,5 @@
 apiVersion: v1
 kind: Config
-preferences:
-  colors: ${colors}
 current-context: ${current_context}
 clusters: 
 %{ for cluster in clusters ~}
