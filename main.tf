@@ -9,7 +9,7 @@ output "kubeconfig_path" {
 }
 
 output "kubeconfig_content" {
-  value       = yamldecode(local_file.kubeconfig.sensitive_content)
+  value       = yamldecode(local_file.kubeconfig.local_sensitive_file)
   description = "HCL representation of kubeconfig file contents"
   sensitive   = true
 }
